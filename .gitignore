@@ -40,3 +40,24 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Angular Environment Files
+# Ignore specific environment files containing secrets
+/src/environments/*.local.ts
+/src/environments/environment.secrets.ts
+
+# Angular build artifacts
+/.angular
+/.ng_pkg_build/
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# Env files
+.env
+.env.local
+.env.*
+
+# Optional: Ignore package-lock if using yarn
+# package-lock.json
