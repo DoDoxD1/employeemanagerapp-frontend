@@ -14,7 +14,10 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" (click)="onOpenModal(null, 'add')"
+        <a
+          class="nav-link"
+          (click)="onOpenModal(null, 'add')"
+          style="cursor: pointer"
           >Add Employee <span class="sr-only">(current)</span></a
         >
       </li>
@@ -35,14 +38,14 @@
 </nav>
 <div class="container" id="main-container">
   <div class="row">
-    <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
+    <div *ngFor="let employee of employees" class="col-md-6 col-xl-4">
       <div class="card m-b-30">
         <div class="card-body row">
           <div class="col-6">
             <a href=""
               ><img
-                src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                alt=""
+                src="{{ employee.imageUrl }}"
+                alt="image"
                 class="img-fluid rounded-circle w-60"
             /></a>
           </div>
@@ -144,7 +147,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #addForm="ngForm">
+          <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
             <div class="form-group">
               <label for="name">Name</label>
               <input
@@ -259,6 +262,7 @@
                 name="name"
                 class="form-control"
                 id="name"
+                ngModel="{{ editEmployee?.name }}"
                 aria-describedby="emailHelp"
                 placeholder="Name"
               />
@@ -267,15 +271,17 @@
               type="hidden"
               name="id"
               class="form-control"
+              ngModel="{{ editEmployee?.id }}"
               id="id"
-              placeholder="Email"
+              placeholder="Id"
             />
             <input
               type="hidden"
               name="userCode"
               class="form-control"
               id="userCode"
-              placeholder="Email"
+              ngModel="{{ editEmployee?.employeeCode }}"
+              placeholder="Employee Code"
             />
             <div class="form-group">
               <label for="email">Email Address</label>
@@ -283,6 +289,7 @@
                 type="email"
                 name="email"
                 class="form-control"
+                ngModel="{{ editEmployee?.email }}"
                 id="email"
                 placeholder="Email"
               />
@@ -294,6 +301,7 @@
                 name="jobTitle"
                 class="form-control"
                 id="jobTitle"
+                ngModel="{{ editEmployee?.jobTitle }}"
                 placeholder="Job title"
               />
             </div>
@@ -304,6 +312,7 @@
                 name="phone"
                 class="form-control"
                 id="phone"
+                ngModel="{{ editEmployee?.phone }}"
                 name="phone"
                 placeholder="Phone"
               />
@@ -315,6 +324,7 @@
                 name="imageUrl"
                 class="form-control"
                 id="imageUrl"
+                ngModel="{{ editEmployee?.imageUrl }}"
                 placeholder="Image URL"
               />
             </div>
@@ -327,7 +337,11 @@
               >
                 Close
               </button>
-              <button data-bs-dismiss="modal" class="btn btn-primary">
+              <button
+                data-bs-dismiss="modal"
+                class="btn btn-primary"
+                (click)="onUpdateEmployee(editForm.value)"
+              >
                 Save changes
               </button>
             </div>
@@ -369,7 +383,13 @@
             >
               No
             </button>
-            <button class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+            <button
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              (click)="onDeleteEmployee(deleteEmployee?.id || -1)"
+            >
+              Yes
+            </button>
           </div>
         </div>
       </div>
