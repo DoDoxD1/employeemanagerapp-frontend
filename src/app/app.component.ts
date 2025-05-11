@@ -38,17 +38,17 @@ export class AppComponent implements OnInit {
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-bs-toggle', 'modal');
     if (mode === 'add') {
       console.log('Addddddd');
       // $('#addEmployeeModal').modal('show');
-      button.setAttribute('data-target', '#addEmployeeModal');
+      button.setAttribute('data-bs-target', '#addEmployeeModal');
     } else if (mode === 'edit') {
       console.log('update');
-      button.setAttribute('data-target', '#updateEmployeeModal');
+      button.setAttribute('data-bs-target', '#updateEmployeeModal');
     } else if (mode === 'delete') {
       console.log('delete');
-      button.setAttribute('data-target', '#deleteEmployeeModal');
+      button.setAttribute('data-bs-target', '#deleteEmployeeModal');
     }
     container?.appendChild(button);
     button.click();
