@@ -25,6 +25,7 @@
     <form class="form-inline my-2 my-lg-0">
       <input
         type="search"
+        (ngModelChange)="searchEmployee(key.value)"
         #key="ngModel"
         ngModel
         name="key"

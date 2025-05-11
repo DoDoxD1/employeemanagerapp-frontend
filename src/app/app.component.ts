@@ -35,6 +35,21 @@ export class AppComponent implements OnInit {
     });
   }
 
+  public searchEmployee(key: string): void {
+    const result: Employee[] = [];
+    this.employees.forEach((employee) => {
+      if (
+        employee.name.toLowerCase().indexOf(key.toLowerCase()) != -1 ||
+        employee.email.toLowerCase().indexOf(key.toLowerCase()) != -1 ||
+        employee.phone.toLowerCase().indexOf(key.toLowerCase()) != -1
+      ) {
+        result.push(employee);
+      }
+    });
+    this.employees = result;
+    if (result.length === 0 || !key) this.getEmployees();
+  }
+
   public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
