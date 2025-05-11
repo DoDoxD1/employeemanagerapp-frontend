@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common'; // Use CommonModule instead of just NgFor
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true, // Add this for standalone components
+  imports: [CommonModule, FormsModule], // Add FormsModule
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   title = 'employeemanagerapp';
-  public employees: Employee[];
+  public employees: Employee[] = [];
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -29,5 +31,26 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     );
+  }
+
+  public onOpenModal(employee: Employee | null, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      console.log('Addddddd');
+      // $('#addEmployeeModal').modal('show');
+      button.setAttribute('data-target', '#addEmployeeModal');
+    } else if (mode === 'edit') {
+      console.log('update');
+      button.setAttribute('data-target', '#updateEmployeeModal');
+    } else if (mode === 'delete') {
+      console.log('delete');
+      button.setAttribute('data-target', '#deleteEmployeeModal');
+    }
+    container?.appendChild(button);
+    button.click();
   }
 }
